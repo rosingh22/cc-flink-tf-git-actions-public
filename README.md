@@ -1,6 +1,6 @@
 # Manage Confluent Cloud Flink with Terraform and GitOps
 
-[![CI/CD Pipeline](https://github.com/rosingh22/cc-flink-tf-git-actions-public/actions/workflows/deploy.yml/badge.svg)](https://github.com/rosingh22/cc-flink-tf-git-actions/actions/workflows/deploy.yml)
+[![CI/CD Pipeline](https://github.com/rosingh22/cc-flink-tf-git-actions-public/actions/workflows/deploy.yml/badge.svg)](https://github.com/rosingh22/cc-flink-tf-git-actions-public/actions/workflows/deploy.yml)
 
 This repository provides a complete GitOps workflow for deploying and managing Flink SQL statements on Confluent Cloud using Terraform and GitHub Actions. This approach treats your stream processing logic as code, enabling version control, automated deployments, and a full CI/CD pipeline.
 
