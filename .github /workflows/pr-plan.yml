@@ -1,0 +1,35 @@
+name: PR - Terraform Plan
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  terraform-plan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.5.0
+
+      - name: Terraform Init
+        run: terraform init -input=false
+
+      - name: Terraform Validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        env:
+          TF_VAR_confluent_cloud_api_key: ${{ secrets.CONFLUENT_CLOUD_API_KEY }}
+          TF_VAR_confluent_cloud_api_secret: ${{ secrets.CONFLUENT_CLOUD_API_SECRET }}
+          TF_VAR_environment_id: ${{ secrets.CONFLUENT_ENV_ID }}
+          TF_VAR_flink_compute_pool_id: ${{ secrets.CONFLUENT_FLINK_POOL_ID }}
+          TF_VAR_flink_api_key: ${{ secrets.CONFLUENT_FLINK_API_KEY }}
+          TF_VAR_flink_api_secret: ${{ secrets.CONFLUENT_FLINK_API_SECRET }}
+          TF_VAR_flink_principal_id: ${{ secrets.CONFLUENT_FLINK_PRINCIPAL_ID }}
+          TF_VAR_flink_rest_endpoint: ${{ secrets.CONFLUENT_FLINK_REST_ENDPOINT }} # optional
+        run: terraform plan -no-color
